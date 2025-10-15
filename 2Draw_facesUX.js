@@ -1,13 +1,19 @@
 // ----=  Faces  =----
 
-let accessoryImage;
+let accessories = [];
+let currentAccessory = 0;
+let wasMouthOpen = false;
+let isMouthOpen = false;
 
 /* load images here */
 function prepareInteraction() {
-  //bgImage = loadImage('/images/background.png');
-  accessoryImage = loadImage('BlueGlasses.png');
+
+  accessories.push(loadImage('BlackGlasses.png'));
+  accessories.push(loadImage('BlueGlasses.png'));
+  accessories.push(loadImage('PinkGlasses.png'));
+
 }
-let isMouthOpen = false;
+
 
 function drawInteraction(faces, hands) {
 
@@ -19,24 +25,25 @@ function drawInteraction(faces, hands) {
       drawPoints(face)
     }
 
-    /*
-    Once this program has a face, it knows some things about it.
-    This includes how to draw a box around the face, and an oval. 
-    It also knows where the key points of the following parts are:
-     face.leftEye
-     face.leftEyebrow
-     face.lips
-     face.rightEye
-     face.rightEyebrow
-    */
+    checkIfMouthOpen(face);
+
+    if(isMouthOpen && !wasMouthOpen) {
+      currentAccessory = (currentAccessory + 1) % accessories.length;
+      clear();
+    }
+
+    wasMouthOpen = isMouthOpen;
 
     /*
     Start drawing on the face here
     */
-    checkIfMouthOpen(face);
-    if (isMouthOpen) {
-      text("blah blah", face.keypoints[287].x, face.keypoints[287].y)
-    }
+
+    noStroke();
+    fill('lightgrey');
+    rect(0, 0, 800, 70);
+    rect(0, 870, 800, 69)
+    ellipse(400, 800, 90, 90);
+
 
     let faceCenterX = face.faceOval.centerX;
     let faceCenterY = face.faceOval.centerY;
@@ -46,9 +53,10 @@ function drawInteraction(faces, hands) {
     let accessoryW = faceWidth * 1.5;
     let accessoryH = faceheight;
 
+    
     image(
-      accessoryImage,
-      faceCenterX - accessoryW /2,
+      accessories[currentAccessory],
+      faceCenterX - accessoryW / 2,
       faceCenterY - accessoryH / 1.5,
       accessoryW,
       accessoryH
@@ -75,7 +83,7 @@ function checkIfMouthOpen(face) {
 
   let d = dist(upperLip.x, upperLip.y, lowerLip.x, lowerLip.y);
   //console.log(d)
-  if (d < 10) {
+  if (d < 13) {
     isMouthOpen = false;
   } else {
     isMouthOpen = true;
