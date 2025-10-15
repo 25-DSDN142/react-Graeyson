@@ -5,15 +5,17 @@ let currentAccessory = 0;
 let wasMouthOpen = false;
 let isMouthOpen = false;
 
+
+
 /* load images here */
 function prepareInteraction() {
 
   accessories.push(loadImage('BlackGlasses.png'));
   accessories.push(loadImage('BlueGlasses.png'));
   accessories.push(loadImage('PinkGlasses.png'));
-
+  accessories.push(loadImage('EyePatch.png'));
+  accessories.push(loadImage('Emote.png'));
 }
-
 
 function drawInteraction(faces, hands) {
 
@@ -27,7 +29,7 @@ function drawInteraction(faces, hands) {
 
     checkIfMouthOpen(face);
 
-    if(isMouthOpen && !wasMouthOpen) {
+    if (isMouthOpen && !wasMouthOpen) {
       currentAccessory = (currentAccessory + 1) % accessories.length;
       clear();
     }
@@ -38,11 +40,22 @@ function drawInteraction(faces, hands) {
     Start drawing on the face here
     */
 
+
+    //camera background details
     noStroke();
+
+    fill(255);
+    textSize(24);
+    text("Open mouth to change filter!");
+
     fill('lightgrey');
     rect(0, 0, 800, 70);
     rect(0, 870, 800, 69)
     ellipse(400, 800, 90, 90);
+    fill('darkgrey');
+    ellipse(400, 800, 60, 60);
+
+
 
 
     let faceCenterX = face.faceOval.centerX;
@@ -53,7 +66,7 @@ function drawInteraction(faces, hands) {
     let accessoryW = faceWidth * 1.5;
     let accessoryH = faceheight;
 
-    
+
     image(
       accessories[currentAccessory],
       faceCenterX - accessoryW / 2,
@@ -113,5 +126,6 @@ function drawPoints(feature) {
     circle(element.x, element.y, 5);
   }
   pop()
+
 
 }
