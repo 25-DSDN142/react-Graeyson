@@ -2,7 +2,6 @@
 let halo;
 let rightHorn;
 let leftHorn;
-
 let angel = true;
 
 function prepareInteraction() {

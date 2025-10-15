@@ -1,7 +1,11 @@
 // ----=  Faces  =----
+
+let accessoryImage;
+
 /* load images here */
 function prepareInteraction() {
   //bgImage = loadImage('/images/background.png');
+  accessoryImage = loadImage('BlueGlasses.png');
 }
 let isMouthOpen = false;
 
@@ -33,6 +37,24 @@ function drawInteraction(faces, hands) {
     if (isMouthOpen) {
       text("blah blah", face.keypoints[287].x, face.keypoints[287].y)
     }
+
+    let faceCenterX = face.faceOval.centerX;
+    let faceCenterY = face.faceOval.centerY;
+    let faceWidth = face.faceOval.width;
+    let faceheight = face.faceOval.height;
+
+    let accessoryW = faceWidth * 1.5;
+    let accessoryH = faceheight;
+
+    image(
+      accessoryImage,
+      faceCenterX - accessoryW /2,
+      faceCenterY - accessoryH / 1.5,
+      accessoryW,
+      accessoryH
+    );
+
+
 
     /*
     Stop drawing on the face here

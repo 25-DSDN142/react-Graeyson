@@ -1,7 +1,10 @@
 // ----=  Faces  =----
 /* load images here */
+
+let accessoryImage;
+
 function prepareInteraction() {
-  //bgImage = loadImage('/images/background.png');
+  accessoryImage = loadImage('BlackGlasses.png');
 }
 
 function drawInteraction(faces, hands) {
@@ -61,20 +64,41 @@ function drawInteraction(faces, hands) {
 
     let noseTipX = face.keypoints[4].x;
     let noseTipY = face.keypoints[4].y;
+
+
     /*
     Start drawing on the face here
     */
-    noStroke()
-    fill(225, 225, 0);
+    let faceCenterX = face.faceOval.centerX;
+    let faceCenterY = face.faceOval.centerY;
+    let faceWidth = face.faceOval.width;
+    let faceheight = face.faceOval.height;
+
+    let accessoryW = faceWidth * 1.5;
+    let accessoryH = faceheight * 0.6;
+
+    image(
+      accessoryImage,
+      faceCenterX - accessoryW /2,
+      faceCenterY - accessoryH / 2,
+      accessoryW,
+      accessoryH
+    );
+
+
+
+
+
+
     // fill(get(leftEyeCenterX, leftEyeCenterY))
 
-    ellipse(leftEyeCenterX, leftEyeCenterY, leftEyeWidth, leftEyeHeight);
+    // ellipse(leftEyeCenterX, leftEyeCenterY, leftEyeWidth, leftEyeHeight);
 
-    drawPoints(face.leftEye);
-    drawPoints(face.leftEyebrow);
-    drawPoints(face.lips);
-    drawPoints(face.rightEye);
-    drawPoints(face.rightEyebrow);
+    // drawPoints(face.leftEye);
+    // drawPoints(face.leftEyebrow);
+    // drawPoints(face.lips);
+    // drawPoints(face.rightEye);
+    // drawPoints(face.rightEyebrow);
 
     // drawX(rightEyeCenterX,rightEyeCenterY);
     // drawX(leftEyeCenterX,leftEyeCenterY);
