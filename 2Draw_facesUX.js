@@ -15,6 +15,7 @@ function prepareInteraction() {
   accessories.push(loadImage('PinkGlasses.png'));
   accessories.push(loadImage('EyePatch.png'));
   accessories.push(loadImage('Emote.png'));
+  accessories.push(loadImage('demon.png'));
 }
 
 function drawInteraction(faces, hands) {
@@ -42,21 +43,6 @@ function drawInteraction(faces, hands) {
 
 
     //camera background details
-    noStroke();
-
-    fill(255);
-    textSize(24);
-    text("Open mouth to change filter!");
-
-    fill('lightgrey');
-    rect(0, 0, 800, 70);
-    rect(0, 870, 800, 69)
-    ellipse(400, 800, 90, 90);
-    fill('darkgrey');
-    ellipse(400, 800, 60, 60);
-
-
-
 
     let faceCenterX = face.faceOval.centerX;
     let faceCenterY = face.faceOval.centerY;
@@ -74,6 +60,19 @@ function drawInteraction(faces, hands) {
       accessoryW,
       accessoryH
     );
+
+    noStroke();
+
+    fill(255);
+    textSize(24);
+    text("Open mouth to change filter!");
+
+    fill('lightgrey');
+    rect(0, 0, 800, 70);
+    rect(0, 870, 800, 69)
+    ellipse(400, 800, 90, 90);
+    fill('darkgrey');
+    ellipse(400, 800, 60, 60);
 
 
 
